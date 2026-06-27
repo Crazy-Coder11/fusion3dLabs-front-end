@@ -33,8 +33,8 @@ export default function HomePage() {
       <HeroSection />
       <FeaturedProducts />
       <ServicesSection />
-      <FaqSection />
       <ScrollShowcase />
+      <FaqSection />
     </>
   )
 }
