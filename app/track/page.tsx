@@ -1,0 +1,380 @@
+'use client'
+
+import { useState, useEffect, Suspense, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
+
+type OrderStatus =
+  | 'order_placed'
+  | 'confirmed'
+  | 'preparing'
+  | 'packed'
+  | 'shipped'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'cancelled'
+
+const STATUS_STEPS: { key: OrderStatus; label: string; icon: string; desc: string }[] = [
+  { key: 'order_placed',     label: 'Order Placed',       icon: '📋', desc: 'Your order has been received and is awaiting review.' },
+  { key: 'confirmed',        label: 'Confirmed',           icon: '✅', desc: 'Your order has been confirmed by our team.' },
+  { key: 'preparing',        label: 'Preparing',           icon: '🔧', desc: 'Your piece is being printed and finished in our studio.' },
+  { key: 'packed',           label: 'Packed',              icon: '📦', desc: 'Your order has been carefully packed and is ready for dispatch.' },
+  { key: 'shipped',          label: 'Shipped',             icon: '🚚', desc: 'Your package is on its way to you.' },
+  { key: 'out_for_delivery', label: 'Out for Delivery',   icon: '🛵', desc: 'Your order is out for delivery today.' },
+  { key: 'delivered',        label: 'Delivered',           icon: '🎉', desc: 'Your order has been delivered. Enjoy your piece!' },
+]
+
+interface OrderData {
+  orderId: string
+  trackingId: string
+  items: Array<{ name: string; finish: string; qty: number; price: number }>
+  customer: { name: string }
+  totalEstimate: number
+  deliveryFee?: number
+  status: OrderStatus | 'cancelled'
+  statusHistory: Array<{ status: OrderStatus; note?: string; updatedAt: string }>
+  courier?: string
+  trackingNumber?: string
+  trackingUrl?: string
+  createdAt: string
+}
+
+async function fetchByTrackingId(trackingId: string): Promise<OrderData | null> {
+  const res = await fetch(`${API_BASE}/api/orders/track/${encodeURIComponent(trackingId)}`, { cache: 'no-store' })
+  if (!res.ok) return null
+  return res.json()
+}
+
+async function fetchByEmail(email: string): Promise<OrderData[]> {
+  const res = await fetch(`${API_BASE}/api/orders/by-email/${encodeURIComponent(email)}`, { cache: 'no-store' })
+  if (!res.ok) return []
+  return res.json()
+}
+
+function StatusTimeline({ status }: { status: OrderStatus | 'cancelled' }) {
+  if (status === 'cancelled') {
+    return (
+      <div className="p-5 rounded-2xl bg-red-500/10 border border-red-500/20 text-center">
+        <p className="text-2xl mb-2">❌</p>
+        <p className="font-semibold text-red-400">Order Cancelled</p>
+        <p className="text-sm text-[var(--text-muted)] mt-1">This order has been cancelled. Contact us if you have questions.</p>
+      </div>
+    )
+  }
+
+  const currentIndex = STATUS_STEPS.findIndex(s => s.key === status)
+
+  return (
+    <div className="space-y-0">
+      {STATUS_STEPS.map((step, i) => {
+        const isComplete = i <= currentIndex
+        const isCurrent = i === currentIndex
+        const isLast = i === STATUS_STEPS.length - 1
+
+        return (
+          <div key={step.key} className="flex gap-4">
+            {/* Timeline spine */}
+            <div className="flex flex-col items-center">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-500 text-sm ${
+                isComplete
+                  ? 'bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/30'
+                  : 'bg-[var(--surface)] border border-[var(--border)]'
+              } ${isCurrent ? 'ring-2 ring-[var(--accent)]/30 ring-offset-2 ring-offset-[var(--bg)]' : ''}`}>
+                {isComplete ? (
+                  isCurrent ? step.icon : (
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  )
+                ) : (
+                  <span className="text-[var(--text-muted)] text-xs">{step.icon}</span>
+                )}
+              </div>
+              {!isLast && (
+                <div className={`w-px flex-1 min-h-[32px] transition-all duration-700 ${
+                  i < currentIndex ? 'bg-[var(--accent)]/50' : 'bg-[var(--border)]'
+                }`} />
+              )}
+            </div>
+
+            {/* Content */}
+            <div className={`pb-6 ${isLast ? 'pb-0' : ''} pt-1 flex-1`}>
+              <div className="flex items-center gap-2 mb-0.5">
+                <p className={`text-sm font-semibold transition-colors ${
+                  isComplete ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)]'
+                }`}>
+                  {step.label}
+                </p>
+                {isCurrent && (
+                  <span className="text-[10px] uppercase tracking-widest text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded-full">
+                    Current
+                  </span>
+                )}
+              </div>
+              {isComplete && (
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed">{step.desc}</p>
+              )}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+function OrderCard({ order }: { order: OrderData }) {
+  const progressPct = order.status === 'cancelled'
+    ? 0
+    : Math.round(((STATUS_STEPS.findIndex(s => s.key === order.status) + 1) / STATUS_STEPS.length) * 100)
+
+  return (
+    <div className="space-y-5 float-in">
+      {/* Header card */}
+      <div className="p-6 rounded-2xl bg-[var(--surface)] border border-[var(--border)]">
+        <div className="flex items-start justify-between mb-4 gap-4 flex-wrap">
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">Order</p>
+            <p className="font-mono font-bold text-[var(--text-primary)]">{order.orderId}</p>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">Tracking ID</p>
+            <p className="font-mono font-bold text-[var(--accent)]">{order.trackingId}</p>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] mb-1">Placed</p>
+            <p className="text-sm text-[var(--text-secondary)]">
+              {new Date(order.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </p>
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        {order.status !== 'cancelled' && (
+          <div className="mb-4">
+            <div className="flex justify-between text-[10px] text-[var(--text-muted)] mb-1.5">
+              <span>Progress</span>
+              <span>{progressPct}%</span>
+            </div>
+            <div className="h-1.5 bg-[var(--bg-3)] rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] rounded-full transition-all duration-1000"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Items */}
+        <div className="border-t border-[var(--border)] pt-4 space-y-1.5">
+          {order.items.map((item, i) => (
+            <div key={i} className="flex justify-between text-sm">
+              <span className="text-[var(--text-secondary)]">{item.name} {item.finish && `(${item.finish})`} ×{item.qty}</span>
+              <span className="text-[var(--text-primary)] font-medium">₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
+            </div>
+          ))}
+          <div className="flex justify-between font-medium text-sm pt-2 border-t border-[var(--border)] mt-2">
+            <span className="text-[var(--text-secondary)]">Product Total</span>
+            <span className="text-[var(--text-primary)]">₹{order.totalEstimate.toLocaleString('en-IN')}</span>
+          </div>
+          <div className="flex justify-between font-medium text-sm pt-2">
+            <span className="text-[var(--text-secondary)]">Delivery Charge</span>
+            <span className={order.deliveryFee !== undefined ? "text-[var(--text-primary)]" : "text-[var(--text-muted)] text-[10px]"}>
+              {order.deliveryFee !== undefined ? `₹${order.deliveryFee.toLocaleString('en-IN')}` : 'Will be updated shortly'}
+            </span>
+          </div>
+          <div className="flex justify-between font-bold text-sm pt-2 border-t border-[var(--border)] bg-[var(--bg-3)] -mx-6 px-6 pb-4 pt-4 rounded-b-2xl mt-4">
+            <span className="text-[var(--text-primary)] uppercase tracking-widest text-[10px]">Total</span>
+            <span className="text-[var(--accent)] text-lg">
+              {order.deliveryFee !== undefined ? `₹${(order.totalEstimate + order.deliveryFee).toLocaleString('en-IN')}` : 'Pending'}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div className="p-6 rounded-2xl bg-[var(--surface)] border border-[var(--border)]">
+        <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-6">Order Timeline</p>
+        <StatusTimeline status={order.status as OrderStatus} />
+      </div>
+
+      {/* Courier info (only when shipped) */}
+      {(order.courier || order.trackingNumber || order.trackingUrl) && (
+        <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--accent)]/20">
+          <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-3">Shipping Details</p>
+          <div className="grid grid-cols-2 gap-3">
+            {order.courier && (
+              <div>
+                <p className="text-[10px] text-[var(--text-muted)] mb-1">Courier</p>
+                <p className="text-sm font-semibold text-[var(--text-primary)]">{order.courier}</p>
+              </div>
+            )}
+            {order.trackingNumber && (
+              <div>
+                <p className="text-[10px] text-[var(--text-muted)] mb-1">Tracking Number</p>
+                <p className="text-sm font-mono text-[var(--accent)]">{order.trackingNumber}</p>
+              </div>
+            )}
+          </div>
+          {order.trackingUrl && (
+            <a
+              href={order.trackingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-3 text-sm text-[var(--accent)] hover:underline"
+            >
+              Track with {order.courier || 'courier'} →
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function TrackContent() {
+  const searchParams = useSearchParams()
+  const [query, setQuery] = useState(searchParams.get('id') || '')
+  const [queryType, setQueryType] = useState<'id' | 'email'>('id')
+  const [orders, setOrders] = useState<OrderData[]>([])
+  const [searched, setSearched] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const search = useCallback(async () => {
+    const trimmed = query.trim()
+    if (!trimmed) return
+    setLoading(true)
+    setError('')
+    setOrders([])
+
+    try {
+      if (queryType === 'id') {
+        const order = await fetchByTrackingId(trimmed)
+        setOrders(order ? [order] : [])
+      } else {
+        const found = await fetchByEmail(trimmed)
+        setOrders(found)
+      }
+      setSearched(true)
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }, [query, queryType])
+
+  // Auto-search if URL has ?id=...
+  useEffect(() => {
+    const id = searchParams.get('id')
+    if (id) {
+      setQuery(id)
+      setQueryType('id')
+      setTimeout(search, 100)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-[var(--bg)] pt-24 pb-24">
+      <div className="max-w-2xl mx-auto px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="mb-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">Order Status</p>
+          <h1 className="text-4xl font-bold text-[var(--text-primary)] tracking-tight">Track Your Order</h1>
+          <p className="text-[var(--text-muted)] mt-2 text-sm">Enter your tracking ID or email address to see your order status.</p>
+        </div>
+
+        {/* Search type toggle */}
+        <div className="flex gap-1 p-1 rounded-xl bg-[var(--surface)] border border-[var(--border)] mb-4 w-fit">
+          {(['id', 'email'] as const).map(t => (
+            <button
+              key={t}
+              onClick={() => setQueryType(t)}
+              className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                queryType === t
+                  ? 'bg-[var(--accent)] text-white'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+              }`}
+            >
+              {t === 'id' ? 'Tracking ID' : 'Email Address'}
+            </button>
+          ))}
+        </div>
+
+        {/* Search bar */}
+        <div className="flex gap-3 mb-10">
+          <input
+            type={queryType === 'email' ? 'email' : 'text'}
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && search()}
+            placeholder={queryType === 'id' ? 'e.g. TRK-XXXXXXXX' : 'you@gmail.com'}
+            className="flex-1 px-4 py-3 bg-[var(--surface)] border border-[var(--border)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors font-mono"
+          />
+          <button
+            onClick={search}
+            disabled={loading || !query.trim()}
+            id="track-search-btn"
+            className="px-6 py-3 bg-[var(--accent)] text-white rounded-xl text-sm font-semibold hover:bg-[var(--accent-2)] transition-colors disabled:opacity-60 flex items-center gap-2"
+          >
+            {loading ? (
+              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : 'Track'}
+          </button>
+        </div>
+
+        {error && (
+          <div className="p-4 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400">
+            {error}
+          </div>
+        )}
+
+        {searched && orders.length === 0 && !loading && (
+          <div className="p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)] text-center">
+            <p className="text-3xl mb-3">🔍</p>
+            <p className="text-[var(--text-primary)] font-semibold mb-2">No orders found</p>
+            <p className="text-xs text-[var(--text-muted)]">
+              {queryType === 'id'
+                ? 'Check the tracking ID in your confirmation email.'
+                : 'Make sure you use the same email you placed the order with.'}
+            </p>
+          </div>
+        )}
+
+        {orders.length > 0 && (
+          <div className="space-y-10">
+            {orders.map(order => <OrderCard key={order.orderId} order={order} />)}
+          </div>
+        )}
+
+        {/* Help text */}
+        {!searched && (
+          <div className="mt-8 p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)]">
+            <p className="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-3">How to find your order</p>
+            <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--accent)] mt-0.5">•</span>
+                Your <strong className="text-[var(--text-primary)]">Tracking ID</strong> was sent in your order confirmation email (format: TRK-XXXXXXXX)
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[var(--accent)] mt-0.5">•</span>
+                You can also search using the <strong className="text-[var(--text-primary)]">email address</strong> you used when placing the order
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default function TrackPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[var(--bg)]" />}>
+      <TrackContent />
+    </Suspense>
+  )
+}
