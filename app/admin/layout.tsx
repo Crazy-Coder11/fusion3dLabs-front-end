@@ -78,7 +78,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="p-5 border-b border-[var(--border)]">
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/logo-full.png"
+              src="/logo.png"
               alt="Fusion3D Labs"
               width={140}
               height={40}
@@ -134,7 +134,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </button>
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo-full.png"
+              src="/logo.png"
               alt="Fusion3D Labs"
               width={120}
               height={36}

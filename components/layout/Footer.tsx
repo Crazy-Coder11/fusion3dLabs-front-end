@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="mb-4">
               <Image
-                src="/logo-full.png"
+                src="/logo.png"
                 alt="Fusion3DLabs"
                 width={200}
                 height={60}
