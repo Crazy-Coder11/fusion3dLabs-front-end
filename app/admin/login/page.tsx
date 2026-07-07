@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="admin@fusion3dlabs.com"
+                placeholder="email"
                 className="w-full px-4 py-3 bg-[var(--bg-3)] border border-[var(--border)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
               />
             </div>
@@ -71,12 +71,6 @@ export default function AdminLoginPage() {
                 placeholder="••••••••"
                 className="w-full px-4 py-3 bg-[var(--bg-3)] border border-[var(--border)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
               />
-            </div>
-
-            <div className="text-xs text-[var(--text-muted)] bg-[var(--bg-3)] px-3 py-2 rounded-lg leading-relaxed">
-              <span className="text-[var(--text-secondary)] font-medium">Dev credentials:</span><br/>
-              Email: <span className="font-mono">admin@fusion3dlabs.com</span><br/>
-              Password: <span className="font-mono">Lavesh_11</span>
             </div>
 
             {error && <p className="text-sm text-red-400 bg-red-500/10 px-3 py-2 rounded-lg">{error}</p>}
