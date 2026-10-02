@@ -1,9 +1,16 @@
 import type { Metadata } from 'next'
 import HeroSection from '@/components/home/HeroSection'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
-import ServicesSection from '@/components/home/ServicesSection'
+import ProcessSteps from '@/components/home/ProcessSteps'
+import PromptDemo from '@/components/home/PromptDemo'
+import LogoRail from '@/components/home/LogoRail'
+import FeatureShowcase from '@/components/home/FeatureShowcase'
+import FeatureGrid from '@/components/home/FeatureGrid'
+import DarkCTA from '@/components/home/DarkCTA'
+import Metrics from '@/components/home/Metrics'
+import Comparison from '@/components/home/Comparison'
 import FaqSection from '@/components/home/FaqSection'
-import ScrollShowcase from '@/components/home/ScrollShowcase'
+import FinalCTA from '@/components/home/FinalCTA'
 
 export const metadata: Metadata = {
   title: 'Turn Your Imagination Into Reality | Fusion3DLabs',
@@ -32,9 +39,16 @@ export default function HomePage() {
       />
       <HeroSection />
       <FeaturedProducts />
-      <ServicesSection />
-      <ScrollShowcase />
+      <ProcessSteps />
+      <PromptDemo />
+      <LogoRail />
+      <FeatureShowcase />
+      <FeatureGrid />
+      <DarkCTA />
+      <Metrics />
+      <Comparison />
       <FaqSection />
+      <FinalCTA />
     </>
   )
 }

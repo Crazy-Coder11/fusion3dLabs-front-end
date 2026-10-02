@@ -35,18 +35,18 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[var(--bg-2)]">
+    <section className="py-24 lg:py-32 bg-bg-2">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-20">
           <SplitReveal
             text="Engineering Tomorrow, Today"
             tag="h2"
-            className="text-4xl lg:text-5xl font-bold text-[var(--text-primary)] tracking-tight mb-4"
+            className="text-4xl lg:text-5xl font-bold text-text-primary tracking-tight mb-4"
             stagger={0.05}
             start="top 85%"
           />
           <ScrollReveal direction="up" delay={100}>
-            <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg">
+            <p className="text-text-secondary max-w-2xl mx-auto text-lg">
               We provide end-to-end creative manufacturing solutions for industries, startups, and independent creators.
             </p>
           </ScrollReveal>
@@ -55,18 +55,18 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, index) => (
             <ScrollReveal key={service.title} direction="up" delay={index * 100}>
-              <div className="p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)]/50 transition-colors h-full flex flex-col">
+              <div className="p-8 rounded-2xl bg-bg-3 border border-border hover:border-accent/50 transition-colors h-full flex flex-col">
                 <div className="text-3xl mb-6">{service.icon}</div>
-                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">{service.title}</h3>
-                <p className="text-[var(--text-secondary)] leading-relaxed flex-1">{service.desc}</p>
+                <h3 className="text-xl font-bold text-text-primary mb-3">{service.title}</h3>
+                <p className="text-text-secondary leading-relaxed flex-1">{service.desc}</p>
               </div>
             </ScrollReveal>
           ))}
           
           <ScrollReveal direction="up" delay={500}>
-            <div className="p-8 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/20 h-full flex flex-col items-center justify-center text-center">
-              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Have a unique project?</h3>
-              <Link href="/bulk-order" className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white text-sm font-medium rounded-full hover:bg-[var(--accent-2)] transition-all">
+            <div className="p-8 rounded-2xl bg-accent/5 border border-accent/20 h-full flex flex-col items-center justify-center text-center">
+              <h3 className="text-xl font-bold text-text-primary mb-4">Have a unique project?</h3>
+              <Link href="/bulk-order" className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-full font-medium hover:bg-accent-2 transition-all">
                 Start Your Project
               </Link>
             </div>

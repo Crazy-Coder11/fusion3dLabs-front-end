@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import type { Metadata } from 'next'
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'

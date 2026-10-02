@@ -6,8 +6,9 @@ import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import ThemeProvider from '@/components/ThemeProvider'
 import CursorGlow from '@/components/CursorGlow'
-import PageTransition from '@/components/PageTransition'
 import ConditionalPublicLayout from '@/components/layout/ConditionalPublicLayout'
+import MotionProvider from '@/components/MotionProvider'
+import CartDrawer from '@/components/layout/CartDrawer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -46,18 +47,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} h-full`} suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className="grain min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <CursorGlow />
-          <PageTransition />
-          <ConditionalPublicLayout>
-            <Navbar />
-          </ConditionalPublicLayout>
-          <main className="flex-1">{children}</main>
-          <ConditionalPublicLayout>
-            <Footer />
-            <WhatsAppButton />
-          </ConditionalPublicLayout>
+          <MotionProvider>
+            <CursorGlow />
+            <ConditionalPublicLayout>
+              <Navbar />
+            </ConditionalPublicLayout>
+            <CartDrawer />
+            <main className="flex-1">{children}</main>
+            <ConditionalPublicLayout>
+              <Footer />
+              <WhatsAppButton />
+            </ConditionalPublicLayout>
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

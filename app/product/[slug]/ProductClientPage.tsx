@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Product } from '@/lib/products'
@@ -12,6 +12,44 @@ interface Props {
   related: Product[]
 }
 
+function injectProductSchema(product: Product) {
+  const script = document.createElement('script')
+  script.type = 'application/ld+json'
+  script.async = true
+  script.text = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.description,
+    brand: {
+      '@type': 'Brand',
+      name: 'Fusion3DLabs',
+    },
+    sku: product.slug,
+    gtin: product.sku,
+    mpn: product.sku,
+    offers: {
+      '@type': 'Offer',
+      url: `https://fusion3dlabs.com/product/${product.slug}`,
+      price: product.price,
+      priceCurrency: 'INR',
+      availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    },
+    images: product.images.map((img: string) => ({
+      '@type': 'ImageObject',
+      url: img,
+    })),
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: product.rating ?? 4.5,
+      reviewCount: product.reviewCount ?? 0,
+    },
+  })
+  const existing = document.querySelector('script[type="application/ld+json"][data-product-schema]')
+  if (existing) existing.remove()
+  document.head.appendChild(script)
+}
+
 export default function ProductClientPage({ product, related }: Props) {
   const [selectedFinish, setSelectedFinish] = useState(product.finish[0])
   const [qty, setQty] = useState(1)
@@ -19,6 +57,7 @@ export default function ProductClientPage({ product, related }: Props) {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [imgError, setImgError] = useState(false)
   const addItem = useCartStore(s => s.addItem)
+  const openCart = useCartStore(s => s.openCart)
 
   const images = product.images?.length ? product.images : []
   const activeImage = images[activeImageIndex] ?? null
@@ -34,8 +73,13 @@ export default function ProductClientPage({ product, related }: Props) {
       image: product.images?.[0],
     })
     setAdded(true)
+    openCart()
     setTimeout(() => setAdded(false), 2000)
   }
+
+  useEffect(() => {
+    injectProductSchema(product)
+  }, [product])
 
   return (
     <div className="min-h-screen bg-[var(--bg)] pt-20">

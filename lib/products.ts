@@ -16,6 +16,9 @@ export interface Product {
   tags: string[]
   inStock: boolean
   relatedSlugs: string[]
+  sku?: string
+  rating?: number
+  reviewCount?: number
 }
 
 export const CATEGORIES = ['All', 'Sculpture', 'Decor', 'Desk Series', 'Wearable', 'Custom']
