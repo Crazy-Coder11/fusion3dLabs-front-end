@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo, useState, Suspense, useCallback } from 'react'
+import { useRef, useMemo, useState, useEffect, Suspense, useCallback } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, Environment } from '@react-three/drei'
 import * as THREE from 'three'
@@ -207,12 +207,14 @@ function MouseReactiveCamera() {
     camera.lookAt(0, 0, 0)
   })
 
-  if (typeof window !== 'undefined') {
-    window.onmousemove = (e) => {
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / size.width) * 2 - 1
       mouse.current.y = (e.clientY / size.height) * 2 - 1
     }
-  }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [size.width, size.height])
 
   return null
 }
