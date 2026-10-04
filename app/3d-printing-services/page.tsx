@@ -3,14 +3,15 @@ import Link from 'next/link'
 import { whatsappUrl } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Custom 3D Printing Services in India',
+  title: 'Online 3D Printing Services India',
   description:
     'Custom 3D printing, design support and rapid prototyping for made-to-order projects delivered across India. Send a reference for a quote.',
   alternates: { canonical: '/3d-printing-services' },
   openGraph: {
-    title: 'Custom 3D Printing Services in India | Fusion3DLabs',
+    title: 'Online 3D Printing Services India | Fusion3DLabs',
     description: 'From an idea, sketch or CAD file to a finished 3D printed part, delivered across India.',
     url: '/3d-printing-services',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Fusion3DLabs online 3D printing services across India' }],
   },
 }
 
@@ -107,7 +108,7 @@ export default function ThreeDPrintingServicesPage() {
           <div className="max-w-4xl">
             <p className="text-xs uppercase tracking-[0.28em] text-primary font-semibold mb-5">Design · Print · Finish · Deliver</p>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-text-primary leading-[1.05]">
-              Custom 3D Printing Services in India
+              Online Custom 3D Printing Services Across India
             </h1>
             <p className="mt-7 text-lg sm:text-xl text-text-secondary leading-relaxed max-w-3xl">
               Turn a CAD file, sketch or idea into a physical part. Fusion3DLabs supports custom FDM printing, design development, rapid prototypes, finishing and delivery across India.
