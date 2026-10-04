@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Product } from '@/lib/products'
@@ -10,45 +10,6 @@ import { useCartStore } from '@/store/cart'
 interface Props {
   product: Product
   related: Product[]
-}
-
-function injectProductSchema(product: Product) {
-  const script = document.createElement('script')
-  script.type = 'application/ld+json'
-  script.async = true
-  script.dataset.productSchema = 'true'
-  script.text = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.name,
-    description: product.description,
-    brand: {
-      '@type': 'Brand',
-      name: 'Fusion3DLabs',
-    },
-    sku: product.slug,
-    ...(product.sku ? { sku: product.sku, mpn: product.sku } : {}),
-    offers: {
-      '@type': 'Offer',
-      url: `https://fusion3dlabs.com/product/${product.slug}`,
-      price: product.price,
-      priceCurrency: 'INR',
-      availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-    },
-    image: product.images,
-    ...(product.rating && product.reviewCount && product.reviewCount > 0
-      ? {
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: product.rating,
-            reviewCount: product.reviewCount,
-          },
-        }
-      : {}),
-  })
-  const existing = document.querySelector('script[type="application/ld+json"][data-product-schema]')
-  if (existing) existing.remove()
-  document.head.appendChild(script)
 }
 
 export default function ProductClientPage({ product, related }: Props) {
@@ -77,10 +38,6 @@ export default function ProductClientPage({ product, related }: Props) {
     openCart()
     setTimeout(() => setAdded(false), 2000)
   }
-
-  useEffect(() => {
-    injectProductSchema(product)
-  }, [product])
 
   return (
     <div className="min-h-screen bg-[var(--bg)] pt-20">

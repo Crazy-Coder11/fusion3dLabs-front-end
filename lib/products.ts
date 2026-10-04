@@ -70,6 +70,9 @@ function mapApiProduct(p: any): Product {
     tags: p.tags ?? [],
     inStock: p.inStock ?? true,
     relatedSlugs: p.relatedSlugs ?? [],
+    sku: p.sku,
+    rating: p.rating,
+    reviewCount: p.reviewCount,
   }
 }
 
