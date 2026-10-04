@@ -37,13 +37,16 @@ export default function ShopPage() {
       <section className="pt-10 sm:pt-14 pb-12 px-6 lg:px-8 bg-bg overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal direction="fade" delay={0}>
-            <p className="text-xs uppercase tracking-[0.3em] text-accent mb-3">All Objects</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent mb-3">Made-to-order collection</p>
           </ScrollReveal>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <ScrollReveal direction="up" delay={80}>
               <h1 className="text-5xl lg:text-6xl font-bold text-text-primary tracking-tight">
-                The Collection
+                3D Printed Products & Custom Objects
               </h1>
+              <p className="mt-4 max-w-2xl text-text-secondary leading-relaxed">
+                Browse current Fusion3DLabs products or start a custom 3D printed object from a photo, sketch, reference or CAD file, with delivery available across India.
+              </p>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={160}>
               <div className="flex items-center gap-3">
@@ -94,7 +97,19 @@ export default function ShopPage() {
       {/* Product grid */}
       <section className="py-12 px-6 lg:px-8 bg-bg min-h-screen">
         <div className="max-w-7xl mx-auto">
-          {filtered.length === 0 ? (
+          {allProducts.length === 0 ? (
+            <div className="mx-auto max-w-3xl rounded-3xl border border-emerald-200 bg-emerald-50 px-7 py-14 text-center sm:px-12">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700">Custom orders are open</p>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-emerald-950">The next product collection is being prepared</h2>
+              <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-emerald-900">
+                The ready-to-order catalogue is currently being updated. You can still request custom 3D printing, model-making support, personalized objects, prototypes and low-volume project work. Share the reference you have and the team will review the design, size, finish and delivery requirements before confirming a quote.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link href="/3d-printing-services" className="rounded-full bg-emerald-700 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-800">Explore 3D Printing Services</Link>
+                <Link href="/bulk-order" className="rounded-full border border-emerald-300 bg-white px-6 py-3 text-sm font-bold text-emerald-900 transition hover:bg-emerald-100">Request a Custom Quote</Link>
+              </div>
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-24">
               <p className="text-text-muted text-lg mb-4">No objects found</p>
               <button onClick={() => { setSearch(''); setActiveCategory('All') }} className="text-accent text-sm hover:underline">
