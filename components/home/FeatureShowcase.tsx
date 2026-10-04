@@ -22,7 +22,7 @@ const FEATURES = [
     cta: 'Explore Shop',
     ctaLink: '/shop',
     visual: '🎨',
-    visualBg: 'linear-gradient(135deg, var(--secondary), #7BB3FF)',
+    visualBg: 'linear-gradient(135deg, #F0FDF4, #DCFCE7)',
     reverse: true,
   },
   {

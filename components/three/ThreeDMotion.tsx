@@ -17,7 +17,7 @@ export default function ThreeDMotion() {
           <mesh key={i} rotation={[(Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.5]}>
             <boxGeometry attach="geometry" />
             <meshStandardMaterial
-              color={i % 2 === 0 ? '#3366ff' : '#2a5acc'}
+              color={i % 2 === 0 ? '#22C55E' : '#86EFAC'}
               opacity={0.4 + (i % 3) * 0.1}
               transparent
             />

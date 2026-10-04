@@ -134,19 +134,19 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Quote Card */}
-            <div className="lg:col-span-5 p-8 sm:p-10 rounded-3xl bg-dark-surface text-white border border-white/10 flex flex-col justify-between shadow-xl">
+            <div className="lg:col-span-5 p-8 sm:p-10 rounded-3xl bg-surface text-text-primary border border-border flex flex-col justify-between shadow-sm">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                   </svg>
                 </div>
-                <blockquote className="text-xl sm:text-2xl font-bold leading-snug tracking-tight text-neutral-100 mb-6">
+                <blockquote className="text-xl sm:text-2xl font-bold leading-snug tracking-tight text-text-primary mb-6">
                   "Every great breakthrough starts as an impossible idea. Our job is to make it tangible."
                 </blockquote>
               </div>
-              <div className="pt-6 border-t border-white/10">
-                <p className="text-sm font-semibold text-white">Founder & Chief Engineer</p>
+              <div className="pt-6 border-t border-border">
+                <p className="text-sm font-semibold text-text-primary">Founder & Chief Engineer</p>
                 <p className="text-xs text-primary font-medium tracking-wide">Fusion3DLabs India</p>
               </div>
             </div>
