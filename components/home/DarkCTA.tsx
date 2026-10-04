@@ -7,7 +7,7 @@ export default function DarkCTA() {
     <section
       className="py-32 lg:py-48 overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #DCFCE7 0%, var(--bg-2) 100%)',
+        background: 'var(--bg-2)',
         borderRadius: 'var(--radius-hero)',
         margin: '0 16px',
         border: '1px solid var(--border)',

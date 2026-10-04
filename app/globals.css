@@ -1,24 +1,24 @@
-/* ─── Light Green & Papery UI ─────────────────────────────────────────── */
-/* Fresh light green canvas, minty paper cards, crisp light green accents */
+/* ─── Pure White & Green UI ───────────────────────────────────────────── */
+/* Clean crisp pure white canvas, white paper containers, fresh green accents */
 
 :root {
-  --bg: #F2FAF4;
-  --bg-2: #E5F5E9;
-  --bg-3: #D0ECD6;
+  --bg: #FFFFFF;
+  --bg-2: #F8FAF8;
+  --bg-3: #ECEFEC;
   --surface: #FFFFFF;
-  --surface-2: #DCF5E3;
-  --border: rgba(34, 197, 94, 0.16);
-  --text-primary: #062817;
-  --text-secondary: #2D553C;
-  --text-muted: #688E75;
-  --primary: #4ADE80;
-  --highlight-1: #86EFAC;
-  --highlight-2: #BBF7D0;
-  --highlight-3: #DCFCE7;
-  --secondary: #DCFCE7;
-  --dark-surface: #081F12;
-  --accent: #4ADE80;
-  --accent-2: #86EFAC;
+  --surface-2: #F2FAF4;
+  --border: rgba(15, 23, 42, 0.08);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --primary: #22C55E;
+  --highlight-1: #16A34A;
+  --highlight-2: #4ADE80;
+  --highlight-3: #86EFAC;
+  --secondary: #F0FDF4;
+  --dark-surface: #F8FAF8;
+  --accent: #22C55E;
+  --accent-2: #4ADE80;
 
   /* Spec #8 & #25: Radii & Easing curves */
   --radius-hero: 58px;
@@ -38,22 +38,22 @@
 
 /* Color theme override for dark mode */
 [data-theme='dark'] {
-  --bg: #07170E;
-  --bg-2: #0E2417;
-  --bg-3: #163623;
-  --surface: #0A1E13;
-  --surface-2: #143220;
-  --border: rgba(74, 222, 128, 0.14);
-  --text-primary: #F0FDF4;
-  --text-secondary: #BBF7D0;
-  --text-muted: #86EFAC;
-  --primary: #4ADE80;
-  --highlight-1: #86EFAC;
-  --highlight-2: #BBF7D0;
+  --bg: #0F172A;
+  --bg-2: #1E293B;
+  --bg-3: #334155;
+  --surface: #1E293B;
+  --surface-2: #334155;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --primary: #22C55E;
+  --highlight-1: #4ADE80;
+  --highlight-2: #86EFAC;
   --highlight-3: #DCFCE7;
-  --secondary: #163825;
-  --accent: #4ADE80;
-  --accent-2: #86EFAC;
+  --secondary: #1E293B;
+  --accent: #22C55E;
+  --accent-2: #4ADE80;
 }
 
 /* Base — Tailwind v4 layer */
@@ -90,8 +90,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: -1;
@@ -110,8 +110,8 @@ body::before {
 
 /* Selection */
 ::selection {
-  background: var(--highlight-1);
-  color: #062817;
+  background: var(--highlight-2);
+  color: #0F172A;
 }
 
 /* ─── Typography ────────────────────────────────────────────────────── */
