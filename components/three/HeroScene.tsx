@@ -239,12 +239,11 @@ export default function HeroScene() {
         dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.25} />
-          <directionalLight position={[5, 5, 5]} intensity={1.4} color="#ffffff" />
-          <pointLight position={[-5, -5, -5]} intensity={0.6} color={ACCENT} />
-          <pointLight position={[5, -3, 2]} intensity={0.4} color="#ff8c42" />
-          <pointLight position={[-3, 4, 2]} intensity={0.2} color="#4466ff" />
-          <Environment preset="city" />
+          <ambientLight intensity={0.7} />
+          <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
+          <pointLight position={[-5, -5, -5]} intensity={0.5} color={ACCENT} />
+          <pointLight position={[5, -3, 2]} intensity={0.4} color="#86EFAC" />
+          <pointLight position={[-3, 4, 2]} intensity={0.3} color="#ffffff" />
           <ParticleDust />
           <ShardField energy={energy} />
           <FocalObject energy={energy} />

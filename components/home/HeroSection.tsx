@@ -62,17 +62,13 @@ export default function HeroSection({
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[80vh] min-h-[90svh] flex items-center overflow-hidden bg-bg"
+      className="relative min-h-[80vh] min-h-[90svh] flex items-center overflow-hidden bg-white"
       style={{ willChange: 'transform' }}
     >
       {/* Three.js background scene */}
       <Suspense fallback={null}>
         <HeroScene />
       </Suspense>
-
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/5" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-20">
