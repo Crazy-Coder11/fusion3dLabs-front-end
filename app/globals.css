@@ -1,24 +1,24 @@
-/* ─── Light Greenish & White Papery UI ─────────────────────────────────── */
-/* Clean crisp paper canvas, soft mint & sage green accents, tactile paper containers */
+/* ─── Light Green & Papery UI ─────────────────────────────────────────── */
+/* Fresh light green canvas, minty paper cards, crisp light green accents */
 
 :root {
-  --bg: #F7FAF7;
-  --bg-2: #EEF5EF;
-  --bg-3: #E0ECE2;
+  --bg: #F2FAF4;
+  --bg-2: #E5F5E9;
+  --bg-3: #D0ECD6;
   --surface: #FFFFFF;
-  --surface-2: #EBF7EE;
-  --border: rgba(22, 101, 52, 0.09);
-  --text-primary: #0D1F15;
-  --text-secondary: #42574A;
-  --text-muted: #84988B;
-  --primary: #22C55E;
-  --highlight-1: #4ADE80;
-  --highlight-2: #86EFAC;
-  --highlight-3: #BBF7D0;
+  --surface-2: #DCF5E3;
+  --border: rgba(34, 197, 94, 0.16);
+  --text-primary: #062817;
+  --text-secondary: #2D553C;
+  --text-muted: #688E75;
+  --primary: #4ADE80;
+  --highlight-1: #86EFAC;
+  --highlight-2: #BBF7D0;
+  --highlight-3: #DCFCE7;
   --secondary: #DCFCE7;
-  --dark-surface: #0F2418;
-  --accent: #22C55E;
-  --accent-2: #4ADE80;
+  --dark-surface: #081F12;
+  --accent: #4ADE80;
+  --accent-2: #86EFAC;
 
   /* Spec #8 & #25: Radii & Easing curves */
   --radius-hero: 58px;
@@ -38,22 +38,22 @@
 
 /* Color theme override for dark mode */
 [data-theme='dark'] {
-  --bg: #0B1711;
-  --bg-2: #122219;
-  --bg-3: #1A3024;
-  --surface: #0E1E16;
-  --surface-2: #162E21;
-  --border: rgba(255, 255, 255, 0.08);
+  --bg: #07170E;
+  --bg-2: #0E2417;
+  --bg-3: #163623;
+  --surface: #0A1E13;
+  --surface-2: #143220;
+  --border: rgba(74, 222, 128, 0.14);
   --text-primary: #F0FDF4;
   --text-secondary: #BBF7D0;
-  --text-muted: #6EE7B7;
-  --primary: #22C55E;
-  --highlight-1: #4ADE80;
-  --highlight-2: #86EFAC;
-  --highlight-3: #BBF7D0;
-  --secondary: #143525;
-  --accent: #22C55E;
-  --accent-2: #4ADE80;
+  --text-muted: #86EFAC;
+  --primary: #4ADE80;
+  --highlight-1: #86EFAC;
+  --highlight-2: #BBF7D0;
+  --highlight-3: #DCFCE7;
+  --secondary: #163825;
+  --accent: #4ADE80;
+  --accent-2: #86EFAC;
 }
 
 /* Base — Tailwind v4 layer */
@@ -90,8 +90,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(15, 21, 29, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 21, 29, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: -1;
@@ -111,7 +111,7 @@ body::before {
 /* Selection */
 ::selection {
   background: var(--highlight-1);
-  color: #FFFFFF;
+  color: #062817;
 }
 
 /* ─── Typography ────────────────────────────────────────────────────── */
@@ -135,7 +135,7 @@ p {
 
 /* Text gradients */
 .text-accent-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--highlight-2) 100%);
+  background: linear-gradient(135deg, #16A34A 0%, var(--primary) 50%, var(--highlight-1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -158,9 +158,9 @@ p {
   border-radius: 999px;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   background: var(--primary);
-  color: #FFFFFF;
+  color: #062817;
   transition: all 220ms var(--ease-out);
   border: none;
   cursor: pointer;
@@ -169,7 +169,7 @@ p {
 .btn-primary:hover {
   background: var(--highlight-1);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.28);
+  box-shadow: 0 8px 24px rgba(74, 222, 128, 0.35);
 }
 
 .btn-primary:active {
@@ -187,8 +187,8 @@ p {
 }
 
 .btn-primary.secondary:hover {
-  background: #d1fae5;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+  background: #c7f7d4;
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.3);
 }
 
 .btn-outline {
@@ -200,17 +200,17 @@ p {
   border-radius: 999px;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--primary);
   transition: all 220ms var(--ease-out);
   cursor: pointer;
 }
 
 .btn-outline:hover {
   background: var(--primary);
-  color: #FFFFFF;
+  color: #062817;
   transform: translateY(-2px);
 }
 
@@ -277,7 +277,7 @@ p {
   height: 480px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 70%);
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.12) 0%, rgba(74, 222, 128, 0) 70%);
   transform: translate(-50%, -50%);
   z-index: 1;
   transition: transform 0.15s ease-out;
