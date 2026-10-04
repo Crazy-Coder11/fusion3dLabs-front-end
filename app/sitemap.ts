@@ -15,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: BASE_URL, changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE_URL}/3d-printing-services`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/custom-3d-printed-keychains`, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${BASE_URL}/3d-printed-lord-ganesh-idols`, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${BASE_URL}/shop`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE_URL}/about`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/contact`, changeFrequency: 'monthly', priority: 0.7 },

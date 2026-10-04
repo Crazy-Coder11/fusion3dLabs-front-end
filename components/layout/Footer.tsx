@@ -5,11 +5,12 @@ import { whatsappUrl } from '@/lib/site'
 const FOOTER_LINKS = {
   explore: [
     { label: '3D Printing Services', href: '/3d-printing-services' },
+    { label: 'Custom 3D Keychains', href: '/custom-3d-printed-keychains' },
+    { label: '3D Printed Ganesh Idols', href: '/3d-printed-lord-ganesh-idols' },
     { label: 'Sculpture', href: '/shop?category=Sculpture' },
     { label: 'Decor', href: '/shop?category=Decor' },
     { label: 'Desk Series', href: '/shop?category=Desk Series' },
-    { label: 'Wearable', href: '/shop?category=Wearable' },
-    { label: 'Custom', href: '/shop?category=Custom' },
+    { label: 'Custom Products', href: '/shop?category=Custom' },
   ],
   company: [
     { label: 'About', href: '/about' },
