@@ -1,24 +1,24 @@
-/* ─── Modern White Papery & Emerald Green UI ───────────────────────────── */
-/* Clean crisp paper canvas, spacious rounded containers, subtle motion, and refined green contrast */
+/* ─── Light Greenish & White Papery UI ─────────────────────────────────── */
+/* Clean crisp paper canvas, soft mint & sage green accents, tactile paper containers */
 
 :root {
-  --bg: #FAFBF9;
-  --bg-2: #F2F5F2;
-  --bg-3: #E5EBE5;
+  --bg: #F7FAF7;
+  --bg-2: #EEF5EF;
+  --bg-3: #E0ECE2;
   --surface: #FFFFFF;
-  --surface-2: #F0F6F1;
-  --border: rgba(15, 23, 42, 0.08);
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --primary: #10B981;
-  --highlight-1: #059669;
-  --highlight-2: #34D399;
-  --highlight-3: #6EE7B7;
-  --secondary: #E6F7ED;
-  --dark-surface: #0F1D17;
-  --accent: #10B981;
-  --accent-2: #34D399;
+  --surface-2: #EBF7EE;
+  --border: rgba(22, 101, 52, 0.09);
+  --text-primary: #0D1F15;
+  --text-secondary: #42574A;
+  --text-muted: #84988B;
+  --primary: #22C55E;
+  --highlight-1: #4ADE80;
+  --highlight-2: #86EFAC;
+  --highlight-3: #BBF7D0;
+  --secondary: #DCFCE7;
+  --dark-surface: #0F2418;
+  --accent: #22C55E;
+  --accent-2: #4ADE80;
 
   /* Spec #8 & #25: Radii & Easing curves */
   --radius-hero: 58px;
@@ -38,22 +38,22 @@
 
 /* Color theme override for dark mode */
 [data-theme='dark'] {
-  --bg: #0C1612;
-  --bg-2: #14231D;
-  --bg-3: #1B2F27;
-  --surface: #112019;
-  --surface-2: #1A3026;
+  --bg: #0B1711;
+  --bg-2: #122219;
+  --bg-3: #1A3024;
+  --surface: #0E1E16;
+  --surface-2: #162E21;
   --border: rgba(255, 255, 255, 0.08);
-  --text-primary: #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-muted: #64748B;
-  --primary: #10B981;
-  --highlight-1: #34D399;
-  --highlight-2: #6EE7B7;
-  --highlight-3: #A7F3D0;
-  --secondary: #123326;
-  --accent: #10B981;
-  --accent-2: #34D399;
+  --text-primary: #F0FDF4;
+  --text-secondary: #BBF7D0;
+  --text-muted: #6EE7B7;
+  --primary: #22C55E;
+  --highlight-1: #4ADE80;
+  --highlight-2: #86EFAC;
+  --highlight-3: #BBF7D0;
+  --secondary: #143525;
+  --accent: #22C55E;
+  --accent-2: #4ADE80;
 }
 
 /* Base — Tailwind v4 layer */
