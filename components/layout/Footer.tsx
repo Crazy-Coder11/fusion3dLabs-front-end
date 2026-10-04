@@ -45,7 +45,7 @@ export default function Footer() {
                 href="https://wa.me/919999999999?text=Hi%20Fusion3D%20Labs!%20I%20have%20a%20question%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full font-medium hover:bg-highlight-1 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-[#062817] rounded-full font-semibold hover:bg-highlight-1 transition-colors text-sm shadow-sm"
               >
                 Chat on WhatsApp
               </Link>

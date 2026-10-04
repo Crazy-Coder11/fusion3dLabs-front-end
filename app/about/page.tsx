@@ -273,27 +273,27 @@ export default function AboutPage() {
 
       {/* ── CTA Banner ──────────────────────────────────────────────── */}
       <section className="py-16 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto rounded-3xl bg-dark-surface text-white p-8 sm:p-14 text-center relative overflow-hidden shadow-2xl">
+        <div className="max-w-5xl mx-auto rounded-3xl bg-secondary/70 border border-primary/25 p-8 sm:p-14 text-center relative overflow-hidden shadow-sm">
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
             <span className="text-xs uppercase tracking-[0.3em] text-primary font-bold">
               Ready to Start?
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-text-primary tracking-tight leading-tight">
               Bring Your Next Big Idea To Life Today
             </h2>
-            <p className="text-text-muted text-sm sm:text-base leading-relaxed">
+            <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
               Upload your CAD file for a custom quote or contact our studio engineers to discuss custom modeling and batch production.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link
                 href="/bulk-order"
-                className="px-8 py-3.5 bg-primary text-white rounded-full font-medium text-sm hover:bg-highlight-1 transition-all shadow-lg"
+                className="px-8 py-3.5 bg-primary text-[#062817] rounded-full font-semibold text-sm hover:bg-highlight-1 transition-all shadow-md shadow-primary/25"
               >
                 Request Custom Quote
               </Link>
               <Link
                 href="/contact"
-                className="px-8 py-3.5 border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all"
+                className="px-8 py-3.5 border border-primary/30 text-text-primary bg-surface/80 rounded-full font-semibold text-sm hover:bg-surface transition-all"
               >
                 Contact Engineers
               </Link>
