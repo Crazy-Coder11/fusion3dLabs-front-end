@@ -50,7 +50,7 @@ function Core({ hovered, color }: { hovered: boolean; color: string }) {
       <mesh ref={wireRef} scale={1.08}>
         <icosahedronGeometry args={[0.85, 1]} />
         <meshBasicMaterial
-          color={hovered ? '#ff8c42' : '#e8630a'}
+          color={hovered ? '#34D399' : '#10B981'}
           wireframe
           transparent
           opacity={hovered ? 0.45 : 0.12}
@@ -62,7 +62,7 @@ function Core({ hovered, color }: { hovered: boolean; color: string }) {
       </mesh>
       <mesh ref={ring2Ref}>
         <torusGeometry args={[1.6, 0.01, 6, 48]} />
-        <meshBasicMaterial color="#ff8c42" transparent opacity={hovered ? 0.4 : 0.1} />
+        <meshBasicMaterial color="#34D399" transparent opacity={hovered ? 0.4 : 0.1} />
       </mesh>
     </>
   )
@@ -126,7 +126,7 @@ function Particles({ hovered, color }: { hovered: boolean; color: string }) {
   )
 }
 
-export default function ProductCardScene({ hovered = false, color = '#e8630a' }: {
+export default function ProductCardScene({ hovered = false, color = '#10B981' }: {
   hovered?: boolean
   color?: string
 }) {
@@ -139,8 +139,8 @@ export default function ProductCardScene({ hovered = false, color = '#e8630a' }:
       <Suspense fallback={null}>
         <ambientLight intensity={0.35} />
         <pointLight position={[3, 3, 3]} intensity={1.8} color="#ffffff" />
-        <pointLight position={[-3, -2, -2]} intensity={1.0} color="#e8630a" />
-        <pointLight position={[0, 3, 2]} intensity={0.5} color="#ff8c42" />
+        <pointLight position={[-3, -2, -2]} intensity={1.0} color="#10B981" />
+        <pointLight position={[0, 3, 2]} intensity={0.5} color="#34D399" />
         <Float speed={1.8} rotationIntensity={0.15} floatIntensity={0.3}>
           <Core hovered={hovered} color={color} />
         </Float>

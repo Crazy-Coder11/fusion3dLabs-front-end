@@ -5,9 +5,9 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, Environment } from '@react-three/drei'
 import * as THREE from 'three'
 
-const ACCENT = '#e8630a'
-const ACCENT2 = '#c2410c'
-const COLORS = [ACCENT, ACCENT2, '#ff8c42', '#3a3a4a', '#4a3520', '#ff6b2c']
+const ACCENT = '#10B981'
+const ACCENT2 = '#059669'
+const COLORS = [ACCENT, ACCENT2, '#34D399', '#0F172A', '#1E293B', '#6EE7B7']
 
 function ShardMesh({ position, rotation, scale, color, energy }: {
   position: [number, number, number]
@@ -111,7 +111,7 @@ function FocalObject({ energy }: { energy: React.MutableRefObject<number> }) {
       </mesh>
       <mesh ref={innerRef} scale={0.6}>
         <icosahedronGeometry args={[1.1, 0]} />
-        <meshStandardMaterial color="#ff8c42" metalness={1} roughness={0} transparent opacity={0.5} envMapIntensity={3} />
+        <meshStandardMaterial color="#34D399" metalness={1} roughness={0} transparent opacity={0.5} envMapIntensity={3} />
       </mesh>
       <mesh ref={wireRef} scale={1.25}>
         <icosahedronGeometry args={[1.1, 1]} />

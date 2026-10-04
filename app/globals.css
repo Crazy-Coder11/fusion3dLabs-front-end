@@ -1,24 +1,24 @@
-/* ─── Nomu-Inspired Clean Matte Paper UI ───────────────────────────────── */
-/* Premium editorial layout with cream canvas, large rounded containers, subtle motion, and strong navy/orange contrast */
+/* ─── Modern White Papery & Emerald Green UI ───────────────────────────── */
+/* Clean crisp paper canvas, spacious rounded containers, subtle motion, and refined green contrast */
 
 :root {
-  --bg: #FFF9F6;
-  --bg-2: #F5F0E1;
-  --bg-3: #E8E0D0;
+  --bg: #FAFBF9;
+  --bg-2: #F2F5F2;
+  --bg-3: #E5EBE5;
   --surface: #FFFFFF;
-  --surface-2: #F0E8D8;
-  --border: rgba(15, 21, 29, 0.1);
-  --text-primary: #0F151D;
-  --text-secondary: #6B7280;
-  --text-muted: #A0A0A0;
-  --primary: #FF7448;
-  --highlight-1: #FF8D69;
-  --highlight-2: #FFA88D;
-  --highlight-3: #FFC8B7;
-  --secondary: #D3E1FF;
-  --dark-surface: #1B232E;
-  --accent: #FF7448;
-  --accent-2: #FFA88D;
+  --surface-2: #F0F6F1;
+  --border: rgba(15, 23, 42, 0.08);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --primary: #10B981;
+  --highlight-1: #059669;
+  --highlight-2: #34D399;
+  --highlight-3: #6EE7B7;
+  --secondary: #E6F7ED;
+  --dark-surface: #0F1D17;
+  --accent: #10B981;
+  --accent-2: #34D399;
 
   /* Spec #8 & #25: Radii & Easing curves */
   --radius-hero: 58px;
@@ -38,22 +38,22 @@
 
 /* Color theme override for dark mode */
 [data-theme='dark'] {
-  --bg: #1B232E;
-  --bg-2: #243342;
-  --bg-3: #2E4053;
-  --surface: #202B37;
-  --surface-2: #2E4053;
+  --bg: #0C1612;
+  --bg-2: #14231D;
+  --bg-3: #1B2F27;
+  --surface: #112019;
+  --surface-2: #1A3026;
   --border: rgba(255, 255, 255, 0.08);
-  --text-primary: #FFF9F6;
-  --text-secondary: #D0D5DD;
-  --text-muted: #88909D;
-  --primary: #FF7448;
-  --highlight-1: #FF8D69;
-  --highlight-2: #FFA88D;
-  --highlight-3: #FFC8B7;
-  --secondary: #1E3A5F;
-  --accent: #FF7448;
-  --accent-2: #FFA88D;
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #64748B;
+  --primary: #10B981;
+  --highlight-1: #34D399;
+  --highlight-2: #6EE7B7;
+  --highlight-3: #A7F3D0;
+  --secondary: #123326;
+  --accent: #10B981;
+  --accent-2: #34D399;
 }
 
 /* Base — Tailwind v4 layer */
@@ -169,7 +169,7 @@ p {
 .btn-primary:hover {
   background: var(--highlight-1);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 116, 72, 0.28);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.28);
 }
 
 .btn-primary:active {
@@ -187,8 +187,8 @@ p {
 }
 
 .btn-primary.secondary:hover {
-  background: #cce0ff;
-  box-shadow: 0 6px 20px rgba(211, 225, 255, 0.4);
+  background: #d1fae5;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
 }
 
 .btn-outline {
@@ -277,7 +277,7 @@ p {
   height: 480px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(255, 116, 72, 0.07) 0%, rgba(255, 116, 72, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 70%);
   transform: translate(-50%, -50%);
   z-index: 1;
   transition: transform 0.15s ease-out;

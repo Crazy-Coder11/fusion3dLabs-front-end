@@ -9,14 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        foreground: '#0F151D',
-        background: '#FFF9F6',
-        primary: '#FF7448',
-        highlight1: '#FF8D69',
-        highlight2: '#FFA88D',
-        highlight3: '#FFC8B7',
-        secondary: '#D3E1FF',
-        darkSurface: '#1B232E',
+        foreground: '#0F172A',
+        background: '#FAFBF9',
+        primary: '#10B981',
+        highlight1: '#059669',
+        highlight2: '#34D399',
+        highlight3: '#6EE7B7',
+        secondary: '#E6F7ED',
+        darkSurface: '#0F1D17',
       },
       borderRadius: {
         landing: '50px',

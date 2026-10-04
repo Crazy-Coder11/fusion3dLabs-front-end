@@ -40,7 +40,7 @@ export default function DarkCTA() {
           <div className="reveal-on-scroll">
             <Link
               href="/bulk-order"
-              className="px-8 py-4 bg-primary text-white rounded-full font-medium hover:bg-highlight-1 transition-all duration-300 inline-flex items-center gap-2 arrow-cta hover:shadow-[0_0_30px_rgba(255,116,72,0.3)]"
+              className="px-8 py-4 bg-primary text-white rounded-full font-medium hover:bg-highlight-1 transition-all duration-300 inline-flex items-center gap-2 arrow-cta hover:shadow-[0_0_30px_rgba(16,185,129,0.35)]"
             >
               Start Your Project
               <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
