@@ -15,25 +15,25 @@ type OrderStatus =
   | 'cancelled'
 
 const STATUS_OPTIONS: { value: OrderStatus; label: string }[] = [
-  { value: 'order_placed',     label: 'Order Placed' },
-  { value: 'confirmed',        label: 'Confirmed' },
-  { value: 'preparing',        label: 'Preparing' },
-  { value: 'packed',           label: 'Packed' },
-  { value: 'shipped',          label: 'Shipped' },
+  { value: 'order_placed', label: 'Order Placed' },
+  { value: 'confirmed', label: 'Confirmed' },
+  { value: 'preparing', label: 'Preparing' },
+  { value: 'packed', label: 'Packed' },
+  { value: 'shipped', label: 'Shipped' },
   { value: 'out_for_delivery', label: 'Out for Delivery' },
-  { value: 'delivered',        label: 'Delivered' },
-  { value: 'cancelled',        label: 'Cancelled' },
+  { value: 'delivered', label: 'Delivered' },
+  { value: 'cancelled', label: 'Cancelled' },
 ]
 
 const STATUS_STYLES: Record<OrderStatus, string> = {
-  order_placed:     'bg-amber-500/15 text-amber-400 border border-amber-500/20',
-  confirmed:        'bg-blue-500/15 text-blue-400 border border-blue-500/20',
-  preparing:        'bg-purple-500/15 text-purple-400 border border-purple-500/20',
-  packed:           'bg-cyan-500/15 text-cyan-400 border border-cyan-500/20',
-  shipped:          'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20',
+  order_placed: 'bg-amber-500/15 text-amber-400 border border-amber-500/20',
+  confirmed: 'bg-blue-500/15 text-blue-400 border border-blue-500/20',
+  preparing: 'bg-purple-500/15 text-purple-400 border border-purple-500/20',
+  packed: 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/20',
+  shipped: 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20',
   out_for_delivery: 'bg-orange-500/15 text-orange-400 border border-orange-500/20',
-  delivered:        'bg-green-500/15 text-green-400 border border-green-500/20',
-  cancelled:        'bg-red-500/15 text-red-400 border border-red-500/20',
+  delivered: 'bg-green-500/15 text-green-400 border border-green-500/20',
+  cancelled: 'bg-red-500/15 text-red-400 border border-red-500/20',
 }
 
 interface OrderItem { name: string; finish: string; qty: number; price: number; slug?: string; image?: string }
@@ -45,6 +45,9 @@ interface Order {
   status: OrderStatus
   customer: { name: string; email: string; phone: string; address?: string; notes?: string }
   items: OrderItem[]
+  subtotal?: number
+  couponCode?: string
+  discountAmount?: number
   totalEstimate: number
   deliveryFee?: number
   adminNotes?: string
@@ -68,11 +71,10 @@ interface EditState {
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function Toast({ message, type }: { message: string; type: 'success' | 'error' }) {
   return (
-    <div className={`fixed bottom-6 right-6 z-50 px-5 py-3.5 rounded-xl text-sm font-medium shadow-2xl flex items-center gap-2.5 float-in ${
-      type === 'success'
+    <div className={`fixed bottom-6 right-6 z-50 px-5 py-3.5 rounded-xl text-sm font-medium shadow-2xl flex items-center gap-2.5 float-in ${type === 'success'
         ? 'bg-green-500/20 border border-green-500/30 text-green-400'
         : 'bg-red-500/20 border border-red-500/30 text-red-400'
-    }`}>
+      }`}>
       {type === 'success' ? '✓' : '✕'} {message}
     </div>
   )
@@ -213,7 +215,7 @@ export default function AdminOrdersPage() {
       {/* Orders list */}
       {loading ? (
         <div className="space-y-3">
-          {[1,2,3].map(i => <div key={i} className="h-24 rounded-2xl shimmer" />)}
+          {[1, 2, 3].map(i => <div key={i} className="h-24 rounded-2xl shimmer" />)}
         </div>
       ) : orders.length === 0 ? (
         <div className="text-center py-24 text-[var(--text-muted)]">
@@ -231,9 +233,8 @@ export default function AdminOrdersPage() {
             return (
               <div
                 key={order._id}
-                className={`rounded-2xl bg-[var(--surface)] border transition-all duration-300 ${
-                  isExpanded ? 'border-[var(--accent)]/30' : 'border-[var(--border)]'
-                }`}
+                className={`rounded-2xl bg-[var(--surface)] border transition-all duration-300 ${isExpanded ? 'border-[var(--accent)]/30' : 'border-[var(--border)]'
+                  }`}
               >
                 {/* Order card header */}
                 <button
@@ -291,13 +292,12 @@ export default function AdminOrdersPage() {
                               key={status.value}
                               type="button"
                               onClick={() => setField(order._id, 'status', status.value)}
-                              className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-bold transition ${
-                                status.value === edit.status
+                              className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-bold transition ${status.value === edit.status
                                   ? 'border-emerald-700 bg-emerald-700 text-white shadow-sm'
                                   : isReached
                                     ? 'border-emerald-200 bg-white text-emerald-800'
                                     : 'border-slate-200 bg-white/70 text-slate-500'
-                              }`}
+                                }`}
                             >
                               {index + 1}. {status.label}
                             </button>

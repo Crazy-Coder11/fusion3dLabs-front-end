@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
+import ProductCardImage from './ProductCardImage'
 
 export interface FeaturedProductItem {
   name: string
@@ -13,6 +13,7 @@ export interface FeaturedProductItem {
   material: string
   dimensions: string
   imageUrl: string
+  productUrl?: string
   category?: string
   featured?: boolean
 }
@@ -49,10 +50,10 @@ export default function FeaturedProductCarousel({ products }: { products: Featur
             className={`${hasMultiple ? 'w-[88%] shrink-0 sm:w-[72%] lg:w-[82%]' : 'w-full'} group snap-center grid items-center gap-6 rounded-3xl border border-white/80 bg-white/92 p-5 shadow-[0_30px_80px_-40px_rgba(6,78,45,0.5)] backdrop-blur-xl sm:p-7 lg:grid-cols-[280px_1fr_auto]`}
           >
             <div className="relative aspect-square overflow-hidden rounded-2xl bg-emerald-50">
-              <Image
+              <ProductCardImage
                 src={product.imageUrl}
+                productUrl={product.productUrl}
                 alt={`${product.name} featured product`}
-                fill
                 sizes="(max-width: 640px) 82vw, 280px"
                 priority={index === 0}
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

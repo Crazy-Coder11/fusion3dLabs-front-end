@@ -25,6 +25,12 @@ async function getCatalogProducts(): Promise<FeaturedProductItem[]> {
 
     return products.map(product => {
       const slug = String(product.slug || FALLBACK_PRODUCT.slug)
+      const storedImage = Array.isArray(product.images) && typeof product.images[0] === 'string'
+        ? product.images[0]
+        : ''
+      const imageVersion = product.updatedAt
+        ? `?v=${encodeURIComponent(String(product.updatedAt))}`
+        : ''
       return {
         name: String(product.name || FALLBACK_PRODUCT.name).replace(/Firdge/gi, 'Fridge'),
         slug,
@@ -35,9 +41,10 @@ async function getCatalogProducts(): Promise<FeaturedProductItem[]> {
         dimensions: String(product.dimensions || FALLBACK_PRODUCT.dimensions).replace(/X/g, ' × '),
         category: String(product.category || '3D Printed'),
         featured: Boolean(product.featured),
-        imageUrl: slug === FALLBACK_PRODUCT.slug
+        productUrl: `${baseUrl}/api/products/${encodeURIComponent(slug)}`,
+        imageUrl: storedImage || (slug === FALLBACK_PRODUCT.slug
           ? FALLBACK_PRODUCT.imageUrl
-          : `${baseUrl}/api/products/${encodeURIComponent(slug)}/image`,
+          : `${baseUrl}/api/products/${encodeURIComponent(slug)}/image${imageVersion}`),
       }
     })
   } catch {

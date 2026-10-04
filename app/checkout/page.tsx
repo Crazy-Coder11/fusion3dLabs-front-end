@@ -10,18 +10,18 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
 
 // ─── Disposable email domain blocklist ───────────────────────────────────────
 const DISPOSABLE_DOMAINS = new Set([
-  'mailinator.com','guerrillamail.com','guerrillamail.org','guerrillamail.net',
-  'guerrillamail.de','guerrillamail.biz','guerrillamail.info','tempmail.com',
-  'temp-mail.org','throwam.com','trashmail.com','trashmail.me','trashmail.net',
-  'yopmail.com','sharklasers.com','guerrillamailblock.com','grr.la',
-  'spam4.me','dispostable.com','mailnull.com','spamgourmet.com',
-  'mytrashmail.com','mailnull.com','filzmail.com','trashmail.io',
-  'getnada.com','maildrop.cc','getairmail.com','fakeinbox.com',
-  'tempr.email','anonaddy.com','moakt.com','throwam.com',
-  'spamevader.com','inboxbear.com','emailondeck.com','spamcanceller.com',
-  'trbvm.com','spambe.at','spaml.com','bccto.me','chacuo.net',
-  'discard.email','discardmail.com','discardmail.de','einrot.com',
-  'example.com','test.com','mailtest.com',
+  'mailinator.com', 'guerrillamail.com', 'guerrillamail.org', 'guerrillamail.net',
+  'guerrillamail.de', 'guerrillamail.biz', 'guerrillamail.info', 'tempmail.com',
+  'temp-mail.org', 'throwam.com', 'trashmail.com', 'trashmail.me', 'trashmail.net',
+  'yopmail.com', 'sharklasers.com', 'guerrillamailblock.com', 'grr.la',
+  'spam4.me', 'dispostable.com', 'mailnull.com', 'spamgourmet.com',
+  'mytrashmail.com', 'mailnull.com', 'filzmail.com', 'trashmail.io',
+  'getnada.com', 'maildrop.cc', 'getairmail.com', 'fakeinbox.com',
+  'tempr.email', 'anonaddy.com', 'moakt.com', 'throwam.com',
+  'spamevader.com', 'inboxbear.com', 'emailondeck.com', 'spamcanceller.com',
+  'trbvm.com', 'spambe.at', 'spaml.com', 'bccto.me', 'chacuo.net',
+  'discard.email', 'discardmail.com', 'discardmail.de', 'einrot.com',
+  'example.com', 'test.com', 'mailtest.com',
 ])
 
 function isDisposableEmail(email: string): boolean {
@@ -228,9 +228,8 @@ export default function CheckoutPage() {
                   onChange={set('address')}
                   placeholder="Full delivery address including city, state, and PIN code"
                   rows={3}
-                  className={`w-full px-4 py-3 bg-[var(--surface)] border rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none transition-colors resize-none ${
-                    errors.address ? 'border-red-500/60 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--accent)]'
-                  }`}
+                  className={`w-full px-4 py-3 bg-[var(--surface)] border rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none transition-colors resize-none ${errors.address ? 'border-red-500/60 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--accent)]'
+                    }`}
                 />
                 {errors.address && <p className="mt-1.5 text-xs text-red-400">{errors.address}</p>}
               </div>
@@ -293,7 +292,7 @@ export default function CheckoutPage() {
                   ) : (
                     <>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                       </svg>
                       Place Order Request
                     </>
@@ -336,9 +335,8 @@ function FormField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full px-4 py-3 bg-[var(--surface)] border rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none transition-colors ${
-          error ? 'border-red-500/60 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--accent)]'
-        }`}
+        className={`w-full px-4 py-3 bg-[var(--surface)] border rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none transition-colors ${error ? 'border-red-500/60 focus:border-red-500' : 'border-[var(--border)] focus:border-[var(--accent)]'
+          }`}
       />
       {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
       {hint && !error && <p className="mt-1.5 text-xs text-[var(--text-muted)]">{hint}</p>}

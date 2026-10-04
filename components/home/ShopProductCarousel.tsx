@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
 import type { FeaturedProductItem } from './FeaturedProductCarousel'
+import ProductCardImage from './ProductCardImage'
 
 export default function ShopProductCarousel({ products }: { products: FeaturedProductItem[] }) {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -39,7 +39,7 @@ export default function ShopProductCarousel({ products }: { products: FeaturedPr
           <article key={product.slug} className="group w-[78%] shrink-0 snap-start overflow-hidden rounded-3xl border border-emerald-900/10 bg-white p-3 shadow-[0_24px_50px_-40px_rgba(6,95,70,0.6)] sm:w-[45%] lg:w-[30%] xl:w-[24%]">
             <Link href={`/product/${product.slug}`} className="block">
               <div className="relative aspect-square overflow-hidden rounded-2xl bg-emerald-50">
-                <Image src={product.imageUrl} alt={product.name} fill sizes="(max-width: 640px) 78vw, (max-width: 1024px) 45vw, 300px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <ProductCardImage src={product.imageUrl} productUrl={product.productUrl} alt={product.name} sizes="(max-width: 640px) 78vw, (max-width: 1024px) 45vw, 300px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 {product.featured && <span className="absolute left-3 top-3 rounded-full bg-emerald-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Featured</span>}
               </div>
               <div className="p-3 pb-2">
