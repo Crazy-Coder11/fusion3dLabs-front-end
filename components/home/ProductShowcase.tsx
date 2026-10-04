@@ -18,10 +18,10 @@ const FALLBACK_PRODUCT: FeaturedProductItem = {
 async function getCatalogProducts(): Promise<FeaturedProductItem[]> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://fusion3dlabs.com'
   try {
-    const response = await fetch(`${baseUrl}/api/products?summary=true&limit=24`, { next: { revalidate: 300 } })
-    if (!response.ok) return [FALLBACK_PRODUCT]
+    const response = await fetch(`${baseUrl}/api/products?summary=true&limit=24`, { cache: 'no-store' })
+    if (!response.ok) return []
     const products = await response.json()
-    if (!Array.isArray(products) || products.length === 0) return [FALLBACK_PRODUCT]
+    if (!Array.isArray(products) || products.length === 0) return []
 
     return products.map(product => {
       const slug = String(product.slug || FALLBACK_PRODUCT.slug)
@@ -48,7 +48,7 @@ async function getCatalogProducts(): Promise<FeaturedProductItem[]> {
       }
     })
   } catch {
-    return [FALLBACK_PRODUCT]
+    return []
   }
 }
 
@@ -57,7 +57,7 @@ export default async function ProductShowcase() {
   const selectedFeatured = catalogProducts.filter(product => product.featured)
   const featuredProducts = selectedFeatured.length > 0
     ? selectedFeatured
-    : [catalogProducts[0] || FALLBACK_PRODUCT]
+    : catalogProducts.slice(0, 1)
 
   return (
     <section className="relative overflow-hidden bg-[#f4f8f4] px-6 py-24 lg:px-8 lg:py-32" aria-labelledby="products-heading">
@@ -70,7 +70,7 @@ export default async function ProductShowcase() {
         </div>
 
         <ProductStage />
-        <FeaturedProductCarousel products={featuredProducts} />
+        {featuredProducts.length > 0 && <FeaturedProductCarousel products={featuredProducts} />}
         <ShopProductCarousel products={catalogProducts} />
       </div>
     </section>
