@@ -1,33 +1,35 @@
 import type { Metadata } from 'next'
 import HeroSection from '@/components/home/HeroSection'
-import FeaturedProducts from '@/components/home/FeaturedProducts'
+import BigBanner from '@/components/home/BigBanner'
+import ProductShowcase from '@/components/home/ProductShowcase'
 import ProcessSteps from '@/components/home/ProcessSteps'
-import PromptDemo from '@/components/home/PromptDemo'
-import LogoRail from '@/components/home/LogoRail'
-import FeatureShowcase from '@/components/home/FeatureShowcase'
 import FeatureGrid from '@/components/home/FeatureGrid'
 import DarkCTA from '@/components/home/DarkCTA'
-import Metrics from '@/components/home/Metrics'
-import Comparison from '@/components/home/Comparison'
 import FaqSection from '@/components/home/FaqSection'
-import FinalCTA from '@/components/home/FinalCTA'
 
 export const metadata: Metadata = {
-  title: 'Turn Your Imagination Into Reality | Fusion3DLabs',
-  description: 'We don\'t simply print objects. We create possibilities. Discover premium 3D printing and rapid prototyping services in India.',
+  title: { absolute: '3D Printing Services India | Fusion3DLabs' },
+  description: 'Get custom 3D printing, CAD design and rapid prototyping with pan-India delivery. Send your idea, sketch or CAD file to Fusion3DLabs for a quote.',
+  alternates: { canonical: '/' },
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'Organization',
+  '@id': 'https://fusion3dlabs.com/#organization',
   name: 'Fusion3DLabs',
-  description: 'Premium 3D printing and rapid prototyping studio. We transform imagination into reality.',
+  description: 'Custom 3D printing, CAD design and rapid prototyping studio serving customers across India.',
   url: 'https://fusion3dlabs.com',
-  image: 'https://fusion3dlabs.com/og-image.jpg',
-  priceRange: '₹₹',
-  currenciesAccepted: 'INR',
-  paymentAccepted: 'Cash, Bank Transfer, Online',
-  areaServed: 'IN',
+  logo: 'https://fusion3dlabs.com/fusion3dlabs-logo-header.png',
+  image: 'https://fusion3dlabs.com/opengraph-image',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    telephone: '+91-63782-06112',
+    areaServed: 'IN',
+    availableLanguage: 'English',
+  },
+  areaServed: { '@type': 'Country', name: 'India' },
 }
 
 export default function HomePage() {
@@ -37,18 +39,17 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSection />
-      <FeaturedProducts />
+      <HeroSection
+        headline="Custom 3D Printing Services in India"
+        subtitle="Turn an idea, sketch or CAD file into a finished part. Fusion3DLabs provides custom 3D printing, design support and rapid prototyping with delivery across India."
+        ctaText="Get a 3D Printing Quote"
+      />
+      <BigBanner />
+      <ProductShowcase />
       <ProcessSteps />
-      <PromptDemo />
-      <LogoRail />
-      <FeatureShowcase />
       <FeatureGrid />
       <DarkCTA />
-      <Metrics />
-      <Comparison />
       <FaqSection />
-      <FinalCTA />
     </>
   )
 }

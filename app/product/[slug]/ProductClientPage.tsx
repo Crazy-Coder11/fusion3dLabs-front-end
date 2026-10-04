@@ -16,6 +16,7 @@ function injectProductSchema(product: Product) {
   const script = document.createElement('script')
   script.type = 'application/ld+json'
   script.async = true
+  script.dataset.productSchema = 'true'
   script.text = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -26,8 +27,7 @@ function injectProductSchema(product: Product) {
       name: 'Fusion3DLabs',
     },
     sku: product.slug,
-    gtin: product.sku,
-    mpn: product.sku,
+    ...(product.sku ? { sku: product.sku, mpn: product.sku } : {}),
     offers: {
       '@type': 'Offer',
       url: `https://fusion3dlabs.com/product/${product.slug}`,
@@ -35,15 +35,16 @@ function injectProductSchema(product: Product) {
       priceCurrency: 'INR',
       availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     },
-    images: product.images.map((img: string) => ({
-      '@type': 'ImageObject',
-      url: img,
-    })),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating ?? 4.5,
-      reviewCount: product.reviewCount ?? 0,
-    },
+    image: product.images,
+    ...(product.rating && product.reviewCount && product.reviewCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.rating,
+            reviewCount: product.reviewCount,
+          },
+        }
+      : {}),
   })
   const existing = document.querySelector('script[type="application/ld+json"][data-product-schema]')
   if (existing) existing.remove()

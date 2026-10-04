@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,6 +8,7 @@ import { useCartStore } from '@/store/cart'
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
+  { href: '/3d-printing-services', label: '3D Printing' },
   { href: '/about', label: 'About' },
   { href: '/shop', label: 'Shop' },
   { href: '/contact', label: 'Contact' },
@@ -15,35 +16,22 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const pathname = usePathname()
-  const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { openCart, itemCount } = useCartStore()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [pathname])
-
-  const totalCount = mounted ? itemCount() : 0
+  const openCart = useCartStore(state => state.openCart)
+  const totalCount = useCartStore(state => state.items.reduce((sum, item) => sum + item.quantity, 0))
 
   return (
-    <>
-      <header
-        className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border/40 transition-all duration-300"
-      >
+    <header className="w-full transition-all duration-300">
+      <div className="w-full bg-white/92 backdrop-blur-xl border-b border-emerald-900/10 transition-all duration-200 shadow-[0_8px_28px_-24px_rgba(6,78,59,0.45)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center group py-2">
             <Image
-              src="/logo.png"
-              alt="Fusion3DLabs"
-              width={140}
-              height={40}
-              className="h-7 sm:h-8 w-auto object-contain"
+              src="/fusion3dlabs-logo-header.png"
+              alt="Fusion3DLabs 3D printing services"
+              width={170}
+              height={50}
+              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105 duration-200"
               priority
             />
           </Link>
@@ -56,10 +44,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm tracking-wide transition-colors duration-200 ${
+                  className={`text-sm tracking-wide rounded-full px-3 py-2 transition-colors duration-200 ${
                     isActive
-                      ? 'text-primary font-semibold'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'bg-emerald-50 text-emerald-700 font-bold'
+                      : 'text-text-secondary hover:bg-emerald-50/70 hover:text-emerald-800'
                   }`}
                 >
                   {link.label}
@@ -126,19 +114,15 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-
-          {/* Menu panel */}
-          <div className="fixed top-16 left-0 right-0 bg-surface border-b border-border shadow-xl p-6 space-y-4">
+        {/* Mobile Drawer Navigation */}
+        {mobileMenuOpen && (
+          <>
+            <div
+              className="fixed inset-0 top-[110px] bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <div className="absolute top-full left-0 right-0 z-50 md:hidden bg-white dark:bg-zinc-900 border-b border-border shadow-2xl p-6 space-y-4">
             <nav className="flex flex-col space-y-3">
               {NAV_LINKS.map(link => {
                 const isActive = pathname === link.href
@@ -169,8 +153,9 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
-        </div>
+        </>
       )}
-    </>
+      </div>
+    </header>
   )
 }

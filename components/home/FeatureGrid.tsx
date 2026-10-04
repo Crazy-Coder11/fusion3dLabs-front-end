@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 
 const FEATURES = [
@@ -7,8 +5,8 @@ const FEATURES = [
     id: 1,
     label: 'Rapid Prototyping',
     title: 'Fail fast, iterate faster',
-    desc: 'Validate product designs with functional prototypes in days, not months.',
-    cta: 'Learn More',
+    desc: 'Create physical prototypes to review form, fit and function before a larger production decision.',
+    cta: 'Explore Prototyping',
     ctaLink: '/about',
     icon: '⚡',
     bgColor: 'var(--primary)',
@@ -17,8 +15,8 @@ const FEATURES = [
     id: 2,
     label: 'Custom 3D Printing',
     title: 'From idea to object',
-    desc: 'Unique gifts, intricate miniatures, and low-volume custom manufacturing.',
-    cta: 'Explore',
+    desc: 'Discuss made-to-order gifts, miniatures, replacement parts and other custom objects.',
+    cta: 'Browse 3D Prints',
     ctaLink: '/shop',
     icon: '🎨',
     bgColor: 'var(--secondary)',
@@ -27,8 +25,8 @@ const FEATURES = [
     id: 3,
     label: 'CAD Design',
     title: 'Design to production',
-    desc: 'Engineers translate your vision into production-ready CAD models.',
-    cta: 'Get Started',
+    desc: 'Develop a printable 3D model from the reference, sketch or design information you provide.',
+    cta: 'Start CAD Design',
     ctaLink: '/bulk-order',
     icon: '📐',
     bgColor: 'var(--highlight-2)',
@@ -37,8 +35,8 @@ const FEATURES = [
     id: 4,
     label: 'Architectural Models',
     title: 'Bring blueprints to life',
-    desc: 'Highly detailed scaled physical models that win pitches and educate.',
-    cta: 'View Projects',
+    desc: 'Turn approved drawings and dimensions into scaled physical models for presentation or study.',
+    cta: 'Explore Model Making',
     ctaLink: '/about',
     icon: '🏛️',
     bgColor: 'var(--highlight-3)',
@@ -47,8 +45,9 @@ const FEATURES = [
 
 export default function FeatureGrid() {
   return (
-    <section className="py-32 lg:py-48 bg-bg overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative py-32 lg:py-40 bg-white overflow-hidden">
+      <div className="absolute left-1/2 top-1/2 h-[680px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-100/55 blur-[110px]" aria-hidden="true" />
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16 reveal-on-scroll">
           <p className="text-xs uppercase tracking-[0.3em] text-primary mb-4">Capabilities</p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight">What We Do</h2>
@@ -58,19 +57,21 @@ export default function FeatureGrid() {
           {FEATURES.map((feat) => (
             <div
               key={feat.id}
-              className="rounded-[var(--radius)] overflow-hidden group transition-all duration-500 hover:shadow-lg"
+              className="feature-card-3d relative rounded-[var(--radius)] overflow-hidden group transition-all duration-500"
               style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
+                background: feat.id === 1 || feat.id === 4
+                  ? 'linear-gradient(145deg, #ffffff 0%, #ecfdf5 100%)'
+                  : 'linear-gradient(145deg, #f7fee7 0%, #ffffff 100%)',
+                border: '1px solid rgba(5, 150, 105, 0.14)',
               }}
             >
               {/* Visual badge */}
               <div className="p-8 pb-0">
                 <div
-                  className="h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110"
-                  style={{ background: feat.bgColor, opacity: 0.15 }}
+                  className="feature-depth-icon h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500"
+                  style={{ background: `color-mix(in srgb, ${feat.bgColor} 18%, white)` }}
                 >
-                  <span className="text-2xl" style={{ opacity: 1 }}>{feat.icon}</span>
+                  <span className="text-2xl">{feat.icon}</span>
                 </div>
               </div>
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { useAdminStore, apiFetch } from '@/store/admin'
-import { formatPrice } from '@/lib/products'
+import { CATEGORIES, formatPrice } from '@/lib/products'
 
 interface Product {
   _id: string; name: string; slug: string; tagline?: string; description?: string
@@ -490,13 +490,16 @@ export default function AdminProductsPage() {
                 />
               </Field>
               <Field label="Category *">
-                <input
-                  type="text"
+                <select
                   value={form.category}
                   onChange={e => setField('category', e.target.value)}
-                  placeholder="Sculpture"
                   className={inputCls}
-                />
+                >
+                  <option value="">Select a category</option>
+                  {CATEGORIES.filter(category => category !== 'All').map(category => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
               </Field>
             </div>
           </Section>

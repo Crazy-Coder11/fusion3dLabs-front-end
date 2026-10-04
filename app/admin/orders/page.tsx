@@ -274,6 +274,37 @@ export default function AdminOrdersPage() {
                 {/* Expanded detail panel */}
                 {isExpanded && edit && (
                   <div className="border-t border-[var(--border)] p-5 space-y-5">
+                    <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                          <p className="text-xs font-bold text-emerald-950">Update customer timeline</p>
+                          <p className="text-[11px] text-emerald-800">Choose the next status below, add an optional customer note, then save. The tracking page and customer email update automatically.</p>
+                        </div>
+                        <Link href={`/track/${order.trackingId}`} target="_blank" className="text-xs font-bold text-emerald-700 hover:underline">Open tracking page ↗</Link>
+                      </div>
+                      <div className="product-carousel flex gap-2 overflow-x-auto pb-1">
+                        {STATUS_OPTIONS.filter(status => status.value !== 'cancelled').map((status, index) => {
+                          const currentIndex = STATUS_OPTIONS.findIndex(option => option.value === edit.status)
+                          const isReached = index <= currentIndex
+                          return (
+                            <button
+                              key={status.value}
+                              type="button"
+                              onClick={() => setField(order._id, 'status', status.value)}
+                              className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-bold transition ${
+                                status.value === edit.status
+                                  ? 'border-emerald-700 bg-emerald-700 text-white shadow-sm'
+                                  : isReached
+                                    ? 'border-emerald-200 bg-white text-emerald-800'
+                                    : 'border-slate-200 bg-white/70 text-slate-500'
+                              }`}
+                            >
+                              {index + 1}. {status.label}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
                     <div className="grid sm:grid-cols-2 gap-4">
 
                       {/* Status update */}
@@ -501,7 +532,7 @@ export default function AdminOrdersPage() {
                             <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             Saving…
                           </>
-                        ) : 'Save Changes'}
+                        ) : 'Update Timeline & Notify Customer'}
                       </button>
                     </div>
                   </div>

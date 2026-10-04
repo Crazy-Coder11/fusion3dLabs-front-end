@@ -1,9 +1,6 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import type { Metadata } from 'next'
-
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
 
 function compressImage(file: File, maxDim = 1200, quality = 0.8): Promise<string> {
@@ -96,8 +93,8 @@ export default function BulkOrderPage() {
         <div className="grid sm:grid-cols-3 gap-4 mb-12">
           {[
             { icon: '◈', title: 'End-to-End Engineering', desc: 'From a napkin sketch to a production-ready CAD model.' },
-            { icon: '⬡', title: 'Scalable Manufacturing', desc: 'From a single prototype to low-volume production runs with significant volume discounts.' },
-            { icon: '○', title: 'Premium White-label', desc: 'Your products, your branding, delivered with Apple-level fit and finish.' },
+            { icon: '⬡', title: 'Quantity Review', desc: 'Share the required quantity so production feasibility and pricing can be reviewed.' },
+            { icon: '○', title: 'Finishing Options', desc: 'Describe the appearance, branding and packaging requirements needed for your project.' },
           ].map(b => (
             <div key={b.title} className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)]">
               <div className="text-xl text-[var(--accent)] mb-3">{b.icon}</div>

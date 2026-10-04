@@ -156,8 +156,8 @@ export default function CheckoutPage() {
         {/* Header */}
         <div className="mb-10">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-2">Final Step</p>
-          <h1 className="text-4xl font-bold text-[var(--text-primary)] tracking-tight">Complete Your Order</h1>
-          <p className="text-[var(--text-muted)] mt-2 text-sm">No payment required now — our team will confirm details and shipping.</p>
+          <h1 className="text-4xl font-bold text-[var(--text-primary)] tracking-tight">Complete Your Order Request</h1>
+          <p className="text-[var(--text-muted)] mt-2 text-sm">No payment is required now. Placing this request does not confirm production—our team will contact you to confirm the order, shipping and timeline.</p>
         </div>
 
         {/* "What Happens Next" card */}
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                       </svg>
-                      Create Something Amazing
+                      Place Order Request
                     </>
                   )}
                 </button>

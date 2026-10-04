@@ -13,27 +13,8 @@ export default function ShopPage() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    // Immediately show any admin-saved local products on top of mock data
-    try {
-      const local = JSON.parse(localStorage.getItem('fusion3d-admin-products') || '[]')
-      if (local.length > 0) {
-        const mapped = local.map((p: any) => ({
-          id: p._id, slug: p.slug, name: p.name, tagline: p.tagline ?? '',
-          description: p.description ?? '', price: p.price, category: p.category,
-          material: p.material ?? '', dimensions: p.dimensions ?? '',
-          finish: p.finish ?? [], images: p.images ?? [], featured: p.featured ?? false,
-          limited: p.limited ?? false, tags: p.tags ?? [], inStock: p.inStock ?? true,
-          relatedSlugs: [],
-        }))
-        setAllProducts(prev => {
-          const existingSlugs = new Set(mapped.map((p: any) => p.slug))
-          return [...mapped, ...prev.filter((p: any) => !existingSlugs.has(p.slug))]
-        })
-      }
-    } catch {}
-
     fetchProductsFromAPI().then(apiProducts => {
-      if (apiProducts.length > 0) setAllProducts(apiProducts)
+      setAllProducts(apiProducts)
     })
   }, [])
 
@@ -53,7 +34,7 @@ export default function ShopPage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-32 pb-12 px-6 lg:px-8 bg-bg overflow-hidden">
+      <section className="pt-10 sm:pt-14 pb-12 px-6 lg:px-8 bg-bg overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal direction="fade" delay={0}>
             <p className="text-xs uppercase tracking-[0.3em] text-accent mb-3">All Objects</p>
@@ -96,10 +77,11 @@ export default function ShopPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                aria-pressed={activeCategory === cat}
+                className={`shrink-0 px-4 py-2 rounded-full border text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat
-                    ? 'bg-accent text-white'
-                    : 'text-text-muted hover:text-text-primary hover:bg-bg-2'
+                    ? '!bg-emerald-600 !text-white border-emerald-600 shadow-[0_6px_18px_rgba(5,150,105,0.28)]'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800'
                 }`}
               >
                 {cat}

@@ -31,7 +31,7 @@ export default function FinalCTA() {
           <div className="reveal-on-scroll">
             <Link
               href="/bulk-order"
-              className="px-12 py-5 bg-primary text-[#062817] rounded-full font-semibold text-lg hover:bg-highlight-1 transition-all duration-300 inline-flex items-center gap-3 arrow-cta hover:shadow-[0_0_40px_rgba(74,222,128,0.35)]"
+              className="px-12 py-5 bg-primary text-white rounded-full font-semibold text-lg hover:bg-highlight-1 transition-all duration-300 inline-flex items-center gap-3 arrow-cta hover:shadow-[0_0_40px_rgba(74,222,128,0.35)]"
             >
               Start Creating
               <svg className="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

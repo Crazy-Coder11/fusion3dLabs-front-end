@@ -57,11 +57,11 @@ function SuccessContent() {
         <div className="text-center mb-8">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--accent)] mb-3">Success</p>
           <h1 className="text-4xl font-bold text-[var(--text-primary)] tracking-tight mb-4">
-            Order Submitted Successfully
+            Your Order Request Has Been Placed
           </h1>
           <p className="text-[var(--text-secondary)] leading-relaxed">
             Thank you for choosing <strong className="text-[var(--text-primary)]">Fusion3D Labs</strong>.<br />
-            Our team has received your order request and will reach out to you shortly.
+            Our team has received your request and will contact you shortly to confirm the order.
           </p>
         </div>
 
@@ -82,12 +82,12 @@ function SuccessContent() {
           </p>
         </div>
 
-        {/* Important note */}
-        <div className="p-5 rounded-2xl bg-[var(--accent)]/5 border border-[var(--accent)]/20 mb-6 relative overflow-hidden">
+        {/* Important confirmation note */}
+        <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 mb-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent)] rounded-l-2xl" />
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed pl-3">
-            <strong className="text-[var(--text-primary)] block mb-1">Please note:</strong>
-            One of our team members will get back to you shortly after placing to confirm the order and discuss shipping charges, delivery timelines, and other details.
+          <p className="text-sm !text-emerald-900 leading-relaxed pl-3">
+            <strong className="block mb-1 text-emerald-950">Next step: team confirmation</strong>
+            Your request has been placed, but production is not confirmed yet. A Fusion3DLabs team member will contact you to confirm the order, shipping charge, delivery timeline and final details.
           </p>
         </div>
 

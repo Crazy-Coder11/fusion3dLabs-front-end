@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useAdminStore, apiFetch } from '@/store/admin'
 
 interface Stats {
@@ -17,14 +18,15 @@ export default function AdminDashboard() {
     if (!token) return
     Promise.all([
       apiFetch('/api/orders?limit=5', {}, token),
+      apiFetch('/api/orders?status=order_placed&limit=1', {}, token),
       apiFetch('/api/bulk-inquiries', {}, token),
-    ]).then(([ordersData, inquiries]) => {
+    ]).then(([ordersData, pendingData, inquiries]) => {
       setRecentOrders(ordersData.orders || [])
       const orders = ordersData.orders || []
       setStats({
         orders: {
           total: ordersData.total || 0,
-          pending: orders.filter((o: any) => o.status === 'order_placed').length,
+          pending: pendingData.total || 0,
           in_production: orders.filter((o: any) => o.status === 'preparing').length,
         },
         inquiries: inquiries.length,
@@ -38,6 +40,16 @@ export default function AdminDashboard() {
         <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">Dashboard</h1>
         <p className="text-sm text-[var(--text-muted)] mt-1">Fusion3D Labs overview</p>
       </div>
+
+      {(stats?.orders.pending ?? 0) > 0 && (
+        <Link href="/admin/orders" className="mb-8 flex items-center justify-between gap-4 rounded-2xl border border-emerald-300 bg-emerald-50 p-5 transition hover:bg-emerald-100">
+          <div>
+            <p className="font-bold !text-emerald-950">New order notification</p>
+            <p className="mt-1 text-sm !text-emerald-800">{stats!.orders.pending} order request{stats!.orders.pending === 1 ? '' : 's'} waiting for confirmation.</p>
+          </div>
+          <span className="rounded-full bg-emerald-700 px-4 py-2 text-xs font-bold text-white">Review orders →</span>
+        </Link>
+      )}
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

@@ -13,37 +13,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProductBySlug(slug) ?? (await fetchProductBySlugFromAPI(slug))
   if (!product) return { title: 'Product Not Found' }
 
-  const productSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.name,
-    description: product.description,
-    brand: {
-      '@type': 'Brand',
-      name: 'Fusion3DLabs',
-    },
-    sku: product.slug,
-    offers: {
-      '@type': 'Offer',
-      url: `https://fusion3dlabs.com/product/${product.slug}`,
-      price: product.price,
-      priceCurrency: 'INR',
-      availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-    },
-    images: product.images.map((img: string) => ({
-      '@type': 'ImageObject',
-      url: img,
-    })),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating ?? 4.5,
-      reviewCount: product.reviewCount ?? 0,
-    },
-  }
-
   return {
     title: `${product.name} — ${product.tagline}`,
     description: product.description.slice(0, 160),
+    alternates: { canonical: `/product/${product.slug}` },
     openGraph: {
       title: product.name,
       description: product.tagline,

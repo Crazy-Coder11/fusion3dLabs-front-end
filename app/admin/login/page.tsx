@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-10">
           <Image
-            src="/logo.png"
+            src="/fusion3dlabs-logo-header.png"
             alt="Fusion3D Labs"
             width={200}
             height={60}

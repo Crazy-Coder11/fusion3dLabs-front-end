@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Privacy Policy', description: 'Privacy Policy for Fusion3D Labs.' }
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Privacy Policy for Fusion3D Labs.',
+  alternates: { canonical: '/privacy' },
+}
 
 export default function PrivacyPage() {
   return (

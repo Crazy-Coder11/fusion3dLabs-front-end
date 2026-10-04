@@ -147,7 +147,7 @@ export default function PromptDemo() {
               <button
                 onClick={handleGenerate}
                 disabled={!inputValue.trim() || isGenerating}
-                className="px-6 py-4 bg-primary text-[#062817] rounded-xl font-semibold hover:bg-highlight-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap arrow-cta"
+                className="px-6 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-highlight-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap arrow-cta"
               >
                 Generate
                 <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

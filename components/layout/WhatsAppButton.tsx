@@ -1,14 +1,16 @@
 'use client'
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
+import { whatsappUrl } from '@/lib/site'
+import { trackEvent } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Fusion3D%20Labs!%20I%20have%20a%20question%20about%20your%20products.`}
+      href={whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      onClick={() => trackEvent('whatsapp_click', { placement: 'floating_button' })}
       className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl hover:scale-110 hover:shadow-2xl transition-all duration-300 group"
     >
       <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform">

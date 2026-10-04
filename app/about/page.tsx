@@ -3,22 +3,23 @@ import Link from 'next/link'
 import ScrollReveal from '@/components/ScrollReveal'
 
 export const metadata: Metadata = {
-  title: 'About the Studio | Fusion3DLabs',
-  description: 'Fusion3DLabs is India’s premium 3D-printing and rapid prototyping studio. We transform imagination into reality with exceptional craftsmanship and engineering precision.',
+  title: 'About the 3D Printing Studio',
+  description: 'Learn how Fusion3DLabs approaches custom 3D printing, design review, rapid prototyping and made-to-order projects across India.',
+  alternates: { canonical: '/about' },
 }
 
 const STATS = [
-  { value: '0.1mm', label: 'Layer Precision' },
-  { value: '48h', label: 'Rapid Turnaround' },
-  { value: '500+', label: 'Prototypes Delivered' },
-  { value: '100%', label: 'In-House Craft' },
+  { value: 'Idea', label: 'Starting Point' },
+  { value: 'CAD', label: 'Design Review' },
+  { value: 'Print', label: 'Production Stage' },
+  { value: 'India', label: 'Delivery Coverage' },
 ]
 
 const PILLARS = [
   {
     number: '01',
-    title: 'Parametric CAD Mastery',
-    desc: 'From rough napkin sketches to high-complexity aerospace CAD files, our engineers refine geometry for flawless physical execution.',
+    title: 'Reference-Led Design',
+    desc: 'Begin with the reference you have. The team reviews the geometry and identifies any modelling work needed before printing.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="12 2 2 7 12 12 22 7 12 2"/>
@@ -29,8 +30,8 @@ const PILLARS = [
   },
   {
     number: '02',
-    title: 'Advanced Materials Library',
-    desc: 'Industrial-grade PLA+, PETG, Carbon Fiber composites, flexible TPU, and ultra-high-definition resin engineered for strength and aesthetic elegance.',
+    title: 'Project-Based Material Review',
+    desc: 'Material requirements are discussed around intended use, geometry, finish and current availability before the quotation is confirmed.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
@@ -39,8 +40,8 @@ const PILLARS = [
   },
   {
     number: '03',
-    title: 'Hand-Finished Artisanship',
-    desc: 'The printer creates the geometry, but our master craftsmen complete the soul—meticulous sanding, vapor smoothing, priming, and custom coats.',
+    title: 'Finishing Review',
+    desc: 'Finishing needs are agreed for each project, including the required appearance, handling and presentation requirements.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
@@ -49,8 +50,8 @@ const PILLARS = [
   },
   {
     number: '04',
-    title: 'Zero-Minimum Agility',
-    desc: 'Whether you need a single 1-of-1 bespoke mechanical prototype or a limited batch of 500 premium units, we scale seamlessly with your vision.',
+    title: 'Quantity Planning',
+    desc: 'Share the number of units you need so the team can review production feasibility, repeatability and project pricing.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10"/>
@@ -74,12 +75,12 @@ const TIMELINE = [
   {
     step: '03',
     title: 'Additive Synthesis',
-    desc: 'High-speed, micron-accurate manufacturing on calibrated industrial-grade additive machines.',
+    desc: 'The approved design is prepared and produced using the process agreed for the project.',
   },
   {
     step: '04',
     title: 'Post-Processing & Inspection',
-    desc: 'Hand-detailing, dimensional verification, and premium packaging delivered straight to your door.',
+    desc: 'The completed project is reviewed, packaged and prepared for the confirmed delivery destination.',
   },
 ]
 
@@ -164,7 +165,7 @@ export default function AboutPage() {
                   After years in the rapid prototyping and industrial additive space, we noticed a critical gap: traditional print shops treated clients like ticket numbers, sacrificing precision, surface finish, and creative collaboration.
                 </p>
                 <p>
-                  We built Fusion3DLabs to be the studio we always wanted as engineers and designers: obsessed with micro-tolerances, rapid 48-hour turnarounds, premium post-processing finishes, and uncompromising customer care.
+                  We built Fusion3DLabs around a clear project workflow: understand the reference, review the design, agree the production requirements, and keep the customer informed before manufacturing begins.
                 </p>
                 <p>
                   From engineering firms and roboticists to artists and interior creators, we partner with visionaries across India to turn prototypes into production-ready realities.
@@ -265,7 +266,7 @@ export default function AboutPage() {
               Uncompromising Quality & Speed
             </h3>
             <p className="text-text-secondary leading-relaxed text-sm sm:text-base">
-              Transforming imagination into physical reality with aerospace-grade precision and fast turnaround. We don’t simply print plastic—we forge new possibilities for innovators.
+              Transforming ideas and digital references into physical objects through a clear design, quotation and production process.
             </p>
           </div>
         </div>
@@ -287,7 +288,7 @@ export default function AboutPage() {
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link
                 href="/bulk-order"
-                className="px-8 py-3.5 bg-primary text-[#062817] rounded-full font-semibold text-sm hover:bg-highlight-1 transition-all shadow-md shadow-primary/25"
+                className="px-8 py-3.5 bg-primary text-white rounded-full font-semibold text-sm hover:bg-highlight-1 transition-all shadow-md shadow-primary/25"
               >
                 Request Custom Quote
               </Link>

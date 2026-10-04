@@ -3,7 +3,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type Theme = 'dark' | 'light'
+type Theme = 'light'
 
 interface ThemeStore {
   theme: Theme
@@ -13,16 +13,15 @@ interface ThemeStore {
 
 export const useThemeStore = create<ThemeStore>()(
   persist(
-    (set, get) => ({
-      theme: 'dark',
+    (set) => ({
+      theme: 'light',
       toggle: () => {
-        const next = get().theme === 'dark' ? 'light' : 'dark'
-        set({ theme: next })
-        document.documentElement.setAttribute('data-theme', next)
+        // Light only — no toggling
+        document.documentElement.setAttribute('data-theme', 'light')
       },
-      setTheme: (t) => {
-        set({ theme: t })
-        document.documentElement.setAttribute('data-theme', t)
+      setTheme: () => {
+        set({ theme: 'light' })
+        document.documentElement.setAttribute('data-theme', 'light')
       },
     }),
     { name: 'fusion3d-theme' }
